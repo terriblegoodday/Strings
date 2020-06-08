@@ -1,0 +1,2 @@
+language = "cpp"
+run = "clang++ -pthread -o main Strings/main.cpp Strings/FLString.cpp && ./main"

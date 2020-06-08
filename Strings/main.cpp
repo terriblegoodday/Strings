@@ -35,7 +35,7 @@ int main(int argc, const char * argv[]) {
     cout << flstring._debugREPL() << endl;
     cout << flstring._debugREPL() << endl;
     cout << flstring << endl;
-    findAndReplace(flstring, "abc", "abcabc");
+    findAndReplace(flstring, "abc", "xxx");
     cout << flstring << endl;
     
     return 0;
