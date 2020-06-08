@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		77C073522474D2A40027C280 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77C073512474D2A40027C280 /* main.cpp */; };
+		77C0735A2474D4040027C280 /* FLString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77C073582474D4040027C280 /* FLString.cpp */; };
+		77C073622474D6F10027C280 /* FLStringUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C073612474D6F10027C280 /* FLStringUnitTests.m */; };
+		77C073672474D72A0027C280 /* FLString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77C073582474D4040027C280 /* FLString.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +28,22 @@
 /* Begin PBXFileReference section */
 		77C0734E2474D2A40027C280 /* Strings */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Strings; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C073512474D2A40027C280 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		77C073582474D4040027C280 /* FLString.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FLString.cpp; sourceTree = "<group>"; };
+		77C073592474D4040027C280 /* FLString.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FLString.hpp; sourceTree = "<group>"; };
+		77C0735F2474D6F10027C280 /* FLStringUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FLStringUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		77C073612474D6F10027C280 /* FLStringUnitTests.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = FLStringUnitTests.m; sourceTree = "<group>"; };
+		77C073632474D6F10027C280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		77C0734B2474D2A40027C280 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0735C2474D6F10027C280 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				77C073502474D2A40027C280 /* Strings */,
+				77C073602474D6F10027C280 /* FLStringUnitTests */,
 				77C0734F2474D2A40027C280 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				77C0734E2474D2A40027C280 /* Strings */,
+				77C0735F2474D6F10027C280 /* FLStringUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,8 +75,19 @@
 			isa = PBXGroup;
 			children = (
 				77C073512474D2A40027C280 /* main.cpp */,
+				77C073582474D4040027C280 /* FLString.cpp */,
+				77C073592474D4040027C280 /* FLString.hpp */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		77C073602474D6F10027C280 /* FLStringUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				77C073612474D6F10027C280 /* FLStringUnitTests.m */,
+				77C073632474D6F10027C280 /* Info.plist */,
+			);
+			path = FLStringUnitTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +110,23 @@
 			productReference = 77C0734E2474D2A40027C280 /* Strings */;
 			productType = "com.apple.product-type.tool";
 		};
+		77C0735E2474D6F10027C280 /* FLStringUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77C073642474D6F10027C280 /* Build configuration list for PBXNativeTarget "FLStringUnitTests" */;
+			buildPhases = (
+				77C0735B2474D6F10027C280 /* Sources */,
+				77C0735C2474D6F10027C280 /* Frameworks */,
+				77C0735D2474D6F10027C280 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FLStringUnitTests;
+			productName = FLStringUnitTests;
+			productReference = 77C0735F2474D6F10027C280 /* FLStringUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -92,6 +137,9 @@
 				ORGANIZATIONNAME = "Eduard Dzhumagaliev";
 				TargetAttributes = {
 					77C0734D2474D2A40027C280 = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					77C0735E2474D6F10027C280 = {
 						CreatedOnToolsVersion = 11.3;
 					};
 				};
@@ -110,16 +158,37 @@
 			projectRoot = "";
 			targets = (
 				77C0734D2474D2A40027C280 /* Strings */,
+				77C0735E2474D6F10027C280 /* FLStringUnitTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		77C0735D2474D6F10027C280 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		77C0734A2474D2A40027C280 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77C0735A2474D4040027C280 /* FLString.cpp in Sources */,
 				77C073522474D2A40027C280 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0735B2474D6F10027C280 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77C073672474D72A0027C280 /* FLString.cpp in Sources */,
+				77C073622474D6F10027C280 /* FLStringUnitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +324,40 @@
 			};
 			name = Release;
 		};
+		77C073652474D6F10027C280 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HA8PQ78LFS;
+				INFOPLIST_FILE = FLStringUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = terriblegoodday.FLStringUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		77C073662474D6F10027C280 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HA8PQ78LFS;
+				INFOPLIST_FILE = FLStringUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = terriblegoodday.FLStringUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -272,6 +375,15 @@
 			buildConfigurations = (
 				77C073562474D2A40027C280 /* Debug */,
 				77C073572474D2A40027C280 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77C073642474D6F10027C280 /* Build configuration list for PBXNativeTarget "FLStringUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77C073652474D6F10027C280 /* Debug */,
+				77C073662474D6F10027C280 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
