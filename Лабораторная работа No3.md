@@ -1,5 +1,7 @@
 # Строки
 
+## repl.it: [https://repl.it/@terriblegoodday/Strings](https://repl.it/@terriblegoodday/Strings)
+
 ## Постановка задачи 
 
 Реализовать класс для представления АТД – абстрактного типа даных.
@@ -90,5 +92,5 @@
 
 ### `friend void findAndReplace(FLString & flstring, const char * stringA, const char * stringB)`
 
-Наивная реализация 
+Наивная реализация поиска и замены вхождений. Пока не работает `“abc”` $\Longrightarrow$ `“abcabc”`
 
