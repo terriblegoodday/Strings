@@ -65,7 +65,7 @@ FLString string3;
 }
 
 - (void)testFindAndReplaceWithVaryingLength {
-    for (int i = 3; i < 16; i++) {
+    for (int i = 1; i < 16; i++) {
         FLString flstring = FLString(i);
         flstring = "abcdeftre";
         
@@ -96,6 +96,18 @@ FLString string3;
     
     XCTAssert(flstring == "");
     
+}
+
+- (void)testFindAndReplaceWithMinimisation {
+    FLString flstring;
+    flstring = "abcdeftre";
+    
+    findAndReplace(flstring, "abc", "ab");
+    XCTAssert(flstring == "abdeftre");
+    findAndReplace(flstring, "abd", "bd");
+    XCTAssert(flstring == "bdeftre");
+    findAndReplace(flstring, "eft", "f");
+    XCTAssert(flstring == "bdfre");
 }
 
 @end
