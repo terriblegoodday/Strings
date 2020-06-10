@@ -53,4 +53,49 @@ FLString string3;
     XCTAssert(string1._debugREPL() == "abcdefgh⏭qwertyu1⏭23456789⏭01234567⏭890abc⏭");
 }
 
+- (void)testFindAndReplaceWithStandardLength {
+    FLString flstring;
+    flstring = "abcdeftre";
+    findAndReplace(flstring, "abc", "abcabc");
+    XCTAssert(flstring == "abcabcdeftre");
+    
+    findAndReplace(flstring, "tre", "xxx");
+    cout << flstring << endl;
+    XCTAssert(flstring == "abcabcdefxxx");
+}
+
+- (void)testFindAndReplaceWithVaryingLength {
+    for (int i = 3; i < 16; i++) {
+        FLString flstring = FLString(i);
+        flstring = "abcdeftre";
+        
+        findAndReplace(flstring, "abc", "abcabc");
+        XCTAssert(flstring == "abcabcdeftre");
+        
+        findAndReplace(flstring, "tre", "xxx");
+        cout << flstring << endl;
+        XCTAssert(flstring == "abcabcdefxxx");
+    }
+}
+
+- (void)testFindAndReplaceWithStringDeletion {
+    FLString flstring;
+    flstring = "abcdeftre";
+    findAndReplace(flstring, "abcdeftre", "");
+    XCTAssert(flstring == "");
+}
+
+- (void)testFindAndReplaceWithIncrementalDeletion {
+    FLString flstring;
+    flstring = "abcdeftre";
+    
+    while (flstring.getLength() != 0) {
+        char & charToRemove = flstring[(int)flstring.getLength() - 1];
+        findAndReplace(flstring, &charToRemove , "");
+    }
+    
+    XCTAssert(flstring == "");
+    
+}
+
 @end

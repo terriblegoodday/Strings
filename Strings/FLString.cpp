@@ -83,6 +83,7 @@ char & FLString::operator[](int b) {
     int charCount = -1;
     
     Chunk * currentChunk = head;
+    char & defaultChar = (*currentChunk)[0];
     
     while (currentChunk != nullptr) {
         for (int i = 0; i < chunkSize; i++) {
@@ -92,7 +93,7 @@ char & FLString::operator[](int b) {
         currentChunk = currentChunk->next;
     }
     
-    return (*currentChunk)[(int)chunkSize - 1];
+    return defaultChar;
 }
 
 FLString & FLString::operator+=(FLString const & source) {
@@ -295,8 +296,10 @@ char & FLString::Chunk::operator[](int i) {
 
 int FLString::find(const char * substring) {
     
-    size_t stringLength = getLength();
-    size_t substringLength = getCstringSize(substring);
+    int stringLength = (int)getLength();
+    int substringLength = (int)getCstringSize(substring);
+    
+    if (stringLength - substringLength < 0) return -1;
             
     for (int i = 0; i < stringLength - substringLength + 1; i++) {
         bool fullMatch = true;
@@ -305,7 +308,6 @@ int FLString::find(const char * substring) {
             
             if ((*this)[i+j] != substring
                 [j]) {
-                cout << (*this)[i+j] << endl;
                 fullMatch = false;
                 break;
             }
@@ -516,7 +518,7 @@ void findAndReplace(FLString & flstring, const char * stringA, const char * stri
     FLString concat;
     while (remainder.find(stringA) != -1) {
         auto index = remainder.find(stringA);
-        FLString replaceString = remainder.substr(0, index - 1);
+        FLString replaceString = remainder.substr(0, index);
         cout << replaceString << endl;
         remainder = remainder.substr(index+stringALength, remainder.getLength()-index-stringALength);
         cout << remainder << endl;
