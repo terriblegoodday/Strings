@@ -72,6 +72,8 @@ public:
     FLString & operator+=(string const & source);
     FLString & operator+=(char const * source);
     
+    char & operator[](int i);
+    
     friend bool operator==(const FLString & left, const FLString & right);
     friend bool operator==(const FLString & left, const char * count);
     

@@ -79,6 +79,22 @@ bool FLString::isLastChunkFull() {
     return tail->getLength() == chunkSize;
 }
 
+char & FLString::operator[](int b) {
+    int charCount = -1;
+    
+    Chunk * currentChunk = head;
+    
+    while (currentChunk != nullptr) {
+        for (int i = 0; i < chunkSize; i++) {
+            if ((*currentChunk)[i] != '\0') charCount++;
+            if (charCount == b) return (*currentChunk)[i];
+        }
+        currentChunk = currentChunk->next;
+    }
+    
+    return (*currentChunk)[(int)chunkSize - 1];
+}
+
 FLString & FLString::operator+=(FLString const & source) {
     if (source.isEmpty()) return *this;
     
@@ -279,34 +295,22 @@ char & FLString::Chunk::operator[](int i) {
 
 int FLString::find(const char * substring) {
     
-    size_t stringLength = getRawLength();
+    size_t stringLength = getLength();
     size_t substringLength = getCstringSize(substring);
-    
-    Chunk * firstChunk = head;
-    Chunk * lastChunk = firstChunk;
-    
-    size_t index = 0;
-    
+            
     for (int i = 0; i < stringLength - substringLength + 1; i++) {
         bool fullMatch = true;
         
-        if (i != 0 && i % chunkSize == 0) {
-            firstChunk = firstChunk->next;
-        }
-        
-        lastChunk = firstChunk;
-        if ((*firstChunk)[i] != '\0') index++;
-        
         for (int j = 0; j < substringLength; j++) {
-            if (j >= chunkSize && (i + j) != 0 && (i + j) % chunkSize == 0) {
-                lastChunk = lastChunk->next;
-            }
-            if ((*lastChunk)[i+j] != substring[j]) {
+            
+            if ((*this)[i+j] != substring
+                [j]) {
+                cout << (*this)[i+j] << endl;
                 fullMatch = false;
                 break;
             }
         }
-        if (fullMatch) return index - 1;
+        if (fullMatch) return i;
     }
     return -1;
 }
@@ -507,9 +511,18 @@ void FLString::insert(size_t afterIndex, const char * substring) {
 }
 
 void findAndReplace(FLString & flstring, const char * stringA, const char * stringB) {
-    while (flstring.find(stringA) != -1) {
-        auto index = flstring.find(stringA);
-        flstring.remove(index, flstring.getCstringSize(stringA));
-        flstring.insert(index, stringB);
+    FLString remainder = flstring;
+    size_t stringALength = flstring.getCstringSize(stringA);
+    FLString concat;
+    while (remainder.find(stringA) != -1) {
+        auto index = remainder.find(stringA);
+        FLString replaceString = remainder.substr(0, index - 1);
+        cout << replaceString << endl;
+        remainder = remainder.substr(index+stringALength, remainder.getLength()-index-stringALength);
+        cout << remainder << endl;
+        concat += replaceString;
+        concat += stringB;
     }
+    concat += remainder;
+    flstring = concat;
 }
