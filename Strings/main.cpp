@@ -13,7 +13,7 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    FLString flstring = FLString(8);
+    FLString flstring = FLString(5);
     flstring = "abcdef";
     cout << flstring << endl;
     

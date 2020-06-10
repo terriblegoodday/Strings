@@ -110,4 +110,21 @@ FLString string3;
     XCTAssert(flstring == "bdfre");
 }
 
+- (void)testFindAndReplaceNonExistent {
+    FLString flstring;
+    flstring = "abcdeftre";
+    
+    findAndReplace(flstring, "iuofhjwe89", "xxx");
+    XCTAssert(flstring == "abcdeftre");
+}
+
+- (void)testFindAndReplaceDuplicate {
+    FLString flstring;
+    flstring = "abcdeftre";
+    
+    findAndReplace(flstring, "abcdeftre", "abcdeftreabcdeftre");
+    cout << flstring << endl;
+    XCTAssert(flstring == "abcdeftreabcdeftre");
+}
+
 @end
