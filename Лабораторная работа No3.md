@@ -91,6 +91,110 @@
 Вставляет подстроку в экземляр класса по индексу `afterIndex`. Можно вставлять как `FLString`, так и стандартную C-строку.
 
 ### `friend void findAndReplace(FLString & flstring, const char * stringA, const char * stringB)`
+### `friend void findAndReplace(FLString & flstring, const char * stringA, const char * stringB)`
 
-Наивная реализация поиска и замены вхождений. Пока не работает `“abc”` $\Longrightarrow$ `“abcabc”`
+Поиск и замена всех вхождений `stringA` на `stringB`
 
+## Тесты
+
+### Инициализация строки
+```
+- (void)testStringInit {
+    [self addCharactersToString:&string1:"abcdefgh"];
+    cout << string1._debugREPL() << endl;
+    XCTAssert(string1._debugREPL() == "abcdefgh⏭");
+//    newString += 'b';
+//    XCTAssert("abcdefghb");
+    [self addCharactersToString:&string1:"qwertyu"];
+    cout << string1._debugREPL() << endl;
+    XCTAssert(string1._debugREPL() == "abcdefgh⏭qwertyu⏭");
+    [self addCharactersToString:&string1: "12345678901234567890"];
+    cout << string1._debugREPL() << endl;
+    XCTAssert(string1._debugREPL() == "abcdefgh⏭qwertyu1⏭23456789⏭01234567⏭890⏭");
+    [self addCharactersToString:&string2:"abc"];
+    string1 += string2;
+    cout << string1._debugREPL() << endl;
+    XCTAssert(string1._debugREPL() == "abcdefgh⏭qwertyu1⏭23456789⏭01234567⏭890abc⏭");
+    string1 += string3;
+    XCTAssert(string1._debugREPL() == "abcdefgh⏭qwertyu1⏭23456789⏭01234567⏭890abc⏭");
+}
+```
+
+
+### Поиск и замена вхождений
+```
+- (void)testFindAndReplaceWithStandardLength {
+	// Здесь начинается
+    FLString flstring;
+    flstring = "abcdeftre";
+    findAndReplace(flstring, FLString("abc"), FLString("abcabc"));
+    XCTAssert(flstring == FLString("abcabcdeftre"));
+    
+    findAndReplace(flstring, "tre", "xxx");
+    cout << flstring << endl;
+    XCTAssert(flstring == "abcabcdefxxx");
+}
+
+- (void)testFindAndReplaceWithVaryingLength {
+    for (int i = 1; i < 16; i++) {
+        FLString flstring = FLString(i);
+        flstring = "abcdeftre";
+        
+        findAndReplace(flstring, FLString("abc"), FLString("abcabc"));
+        XCTAssert(flstring == FLString("abcabcdeftre"));
+        
+        findAndReplace(flstring, FLString("tre"), FLString("xxx"));
+        cout << flstring << endl;
+        XCTAssert(flstring == FLString("abcabcdefxxx"));
+    }
+}
+
+- (void)testFindAndReplaceWithStringDeletion {
+    FLString flstring;
+    flstring = "abcdeftre";
+    findAndReplace(flstring, FLString("abcdeftre"), FLString(""));
+    XCTAssert(flstring == FLString(""));
+}
+
+- (void)testFindAndReplaceWithIncrementalDeletion {
+    FLString flstring;
+    flstring = "abcdeftre";
+    
+    while (flstring.getLength() != 0) {
+        char & charToRemove = flstring[(int)flstring.getLength() - 1];
+        findAndReplace(flstring, FLString(&charToRemove) , FLString(""));
+    }
+    
+    XCTAssert(flstring == FLString(""));
+    
+}
+
+- (void)testFindAndReplaceWithMinimisation {
+    FLString flstring;
+    flstring = "abcdeftre";
+    
+    findAndReplace(flstring, FLString("abc"), FLString("ab"));
+    XCTAssert(flstring == FLString("abdeftre"));
+    findAndReplace(flstring, FLString("abd"), FLString("bd"));
+    XCTAssert(flstring == FLString("bdeftre"));
+    findAndReplace(flstring, FLString("eft"), FLString("f"));
+    XCTAssert(flstring == FLString("bdfre"));
+}
+
+- (void)testFindAndReplaceNonExistent {
+    FLString flstring;
+    flstring = "abcdeftre";
+    
+    findAndReplace(flstring, FLString("iuofhjwe89"), FLString("xxx"));
+    XCTAssert(flstring == FLString("abcdeftre"));
+}
+
+- (void)testFindAndReplaceDuplicate {
+    FLString flstring;
+    flstring = "abcdeftre";
+    
+    findAndReplace(flstring, FLString("abcdeftre"), FLString("abcdeftreabcdeftre"));
+    cout << flstring << endl;
+    XCTAssert(flstring == FLString("abcdeftreabcdeftre"));
+}
+```

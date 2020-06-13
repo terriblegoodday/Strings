@@ -317,6 +317,10 @@ int FLString::find(const char * substring) {
     return -1;
 }
 
+int FLString::find(const FLString & substring) {
+    return find(substring.getRegularString().c_str());
+};
+
 FLString FLString::substr(size_t left, size_t count) {
     
     FLString flstring(this->chunkSize);
