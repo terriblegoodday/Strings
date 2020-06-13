@@ -90,9 +90,8 @@ public:
     void insert(size_t afterIndex, const char * subtring);
     
     friend void findAndReplace(FLString & flstring, const char * stringA, const char * stringB);
+    friend void findAndReplace(FLString & flstring, const FLString & stringA, const FLString & stringB);
     
 };
-
-void findAndReplace(FLString & flstring, const char * stringA, FLString & stringB);
 
 #endif /* FLString_hpp */

@@ -56,8 +56,8 @@ FLString string3;
 - (void)testFindAndReplaceWithStandardLength {
     FLString flstring;
     flstring = "abcdeftre";
-    findAndReplace(flstring, "abc", "abcabc");
-    XCTAssert(flstring == "abcabcdeftre");
+    findAndReplace(flstring, FLString("abc"), FLString("abcabc"));
+    XCTAssert(flstring == FLString("abcabcdeftre"));
     
     findAndReplace(flstring, "tre", "xxx");
     cout << flstring << endl;
@@ -69,20 +69,20 @@ FLString string3;
         FLString flstring = FLString(i);
         flstring = "abcdeftre";
         
-        findAndReplace(flstring, "abc", "abcabc");
-        XCTAssert(flstring == "abcabcdeftre");
+        findAndReplace(flstring, FLString("abc"), FLString("abcabc"));
+        XCTAssert(flstring == FLString("abcabcdeftre"));
         
-        findAndReplace(flstring, "tre", "xxx");
+        findAndReplace(flstring, FLString("tre"), FLString("xxx"));
         cout << flstring << endl;
-        XCTAssert(flstring == "abcabcdefxxx");
+        XCTAssert(flstring == FLString("abcabcdefxxx"));
     }
 }
 
 - (void)testFindAndReplaceWithStringDeletion {
     FLString flstring;
     flstring = "abcdeftre";
-    findAndReplace(flstring, "abcdeftre", "");
-    XCTAssert(flstring == "");
+    findAndReplace(flstring, FLString("abcdeftre"), FLString(""));
+    XCTAssert(flstring == FLString(""));
 }
 
 - (void)testFindAndReplaceWithIncrementalDeletion {
@@ -91,10 +91,10 @@ FLString string3;
     
     while (flstring.getLength() != 0) {
         char & charToRemove = flstring[(int)flstring.getLength() - 1];
-        findAndReplace(flstring, &charToRemove , "");
+        findAndReplace(flstring, FLString(&charToRemove) , FLString(""));
     }
     
-    XCTAssert(flstring == "");
+    XCTAssert(flstring == FLString(""));
     
 }
 
@@ -102,29 +102,29 @@ FLString string3;
     FLString flstring;
     flstring = "abcdeftre";
     
-    findAndReplace(flstring, "abc", "ab");
-    XCTAssert(flstring == "abdeftre");
-    findAndReplace(flstring, "abd", "bd");
-    XCTAssert(flstring == "bdeftre");
-    findAndReplace(flstring, "eft", "f");
-    XCTAssert(flstring == "bdfre");
+    findAndReplace(flstring, FLString("abc"), FLString("ab"));
+    XCTAssert(flstring == FLString("abdeftre"));
+    findAndReplace(flstring, FLString("abd"), FLString("bd"));
+    XCTAssert(flstring == FLString("bdeftre"));
+    findAndReplace(flstring, FLString("eft"), FLString("f"));
+    XCTAssert(flstring == FLString("bdfre"));
 }
 
 - (void)testFindAndReplaceNonExistent {
     FLString flstring;
     flstring = "abcdeftre";
     
-    findAndReplace(flstring, "iuofhjwe89", "xxx");
-    XCTAssert(flstring == "abcdeftre");
+    findAndReplace(flstring, FLString("iuofhjwe89"), FLString("xxx"));
+    XCTAssert(flstring == FLString("abcdeftre"));
 }
 
 - (void)testFindAndReplaceDuplicate {
     FLString flstring;
     flstring = "abcdeftre";
     
-    findAndReplace(flstring, "abcdeftre", "abcdeftreabcdeftre");
+    findAndReplace(flstring, FLString("abcdeftre"), FLString("abcdeftreabcdeftre"));
     cout << flstring << endl;
-    XCTAssert(flstring == "abcdeftreabcdeftre");
+    XCTAssert(flstring == FLString("abcdeftreabcdeftre"));
 }
 
 @end

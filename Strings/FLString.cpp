@@ -528,3 +528,7 @@ void findAndReplace(FLString & flstring, const char * stringA, const char * stri
     concat += remainder;
     flstring = concat;
 }
+
+void findAndReplace(FLString & flstring, const FLString & stringA, const FLString & stringB) {
+    findAndReplace(flstring, stringA.getRegularString().c_str(), stringB.getRegularString().c_str());
+}
