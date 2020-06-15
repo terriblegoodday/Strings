@@ -298,6 +298,8 @@ char & FLString::Chunk::operator[](int i) {
 
 int FLString::find(const char * substring) {
     
+    if (*substring == '\0') return -1;
+    
     int stringLength = (int)getLength();
     int substringLength = (int)getCstringSize(substring);
     
