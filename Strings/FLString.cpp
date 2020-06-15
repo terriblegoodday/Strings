@@ -525,9 +525,7 @@ void findAndReplace(FLString & flstring, const char * stringA, const char * stri
     while (remainder.find(stringA) != -1) {
         auto index = remainder.find(stringA);
         FLString replaceString = remainder.substr(0, index);
-        cout << replaceString << endl;
         remainder = remainder.substr(index+stringALength, remainder.getLength()-index-stringALength);
-        cout << remainder << endl;
         concat += replaceString;
         concat += stringB;
     }
