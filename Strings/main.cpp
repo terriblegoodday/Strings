@@ -19,6 +19,9 @@ int main(int argc, const char * argv[]) {
     
     findAndReplace(flstring, "abc", "abcabc");
     cout << flstring << endl;
+
+    flstring = flstring+"___"+flstring+"------";
+    cout << flstring << endl;
     
     return 0;
 }

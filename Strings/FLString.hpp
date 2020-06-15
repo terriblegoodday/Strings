@@ -62,10 +62,13 @@ public:
     
     FLString & operator=(const FLString & source);
     FLString & operator=(const char * source);
-    friend FLString operator+(FLString & destination, const FLString & source);
+    friend FLString operator+(const FLString & destination, const FLString & source);
     friend FLString operator+(FLString & destination, const char & source);
     friend FLString operator+(FLString & destination, const string & source);
     friend FLString operator+(FLString & destination, char const * source);
+    friend FLString operator+(char const * source, FLString & destination);
+    friend FLString operator+(const string & source, FLString & destination);
+    friend FLString operator+(const char & source, FLString & destination);
 
     FLString & operator+=(FLString const & source);
     FLString & operator+=(char const & source);
@@ -81,6 +84,7 @@ public:
     friend istream & operator>>(istream & stream, FLString & destination);
     
     int find(const char * substring);
+    int find(const FLString & substring);
     FLString substr(size_t left, size_t count = 1);
     
     string _debugREPL();

@@ -110,9 +110,11 @@ FLString & FLString::operator+=(FLString const & source) {
     return *this;
 }
 
-FLString operator+(FLString & destination, const FLString & source) {
-    destination += source;
-    return destination;
+FLString operator+(const FLString & destination, const FLString & source) {
+    FLString flstring = FLString(destination.chunkSize);
+    flstring = destination;
+    flstring += source;
+    return flstring;
 }
 
 
@@ -535,4 +537,25 @@ void findAndReplace(FLString & flstring, const char * stringA, const char * stri
 
 void findAndReplace(FLString & flstring, const FLString & stringA, const FLString & stringB) {
     findAndReplace(flstring, stringA.getRegularString().c_str(), stringB.getRegularString().c_str());
+}
+
+FLString operator+(char const * source, FLString & destination) {
+    FLString flstring = FLString(destination.chunkSize);
+    flstring = source;
+    flstring += destination;
+    return flstring;
+}
+
+FLString operator+(char const & source, FLString & destination) {
+    FLString flstring = FLString(destination.chunkSize);
+    flstring = source;
+    flstring += destination;
+    return flstring;
+}
+
+FLString operator+(string const & source, FLString & destination) {
+    FLString flstring = FLString(destination.chunkSize);
+    flstring += source;
+    flstring += destination;
+    return flstring;
 }
